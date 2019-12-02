@@ -37,3 +37,4 @@ for noun, verb in product(range(100), range(100)):
     memory[1:3] = [noun, verb]
     if execute_program(memory)[0] == 19690720:
         print(f'Solution: {100*noun + verb}')
+        break

@@ -22,9 +22,8 @@ def route_from_vectors(vectors: list) -> list:
 
     for dist_x, dist_y in vectors:
         first_on_segment = True
-        for point in product(inclusive_range(dist_x), inclusive_range(dist_y)):
-            point_on_route = (current_position[0] + point[0],
-                              current_position[1] + point[1])
+        for x, y in product(inclusive_range(dist_x), inclusive_range(dist_y)):
+            point_on_route = (current_position[0] + x, current_position[1] + y)
 
             # do not repeat corner points, but do include starting point
             if first_on_segment:

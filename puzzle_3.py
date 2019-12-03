@@ -44,7 +44,9 @@ def routes_from_input_data(input_data: str) -> tuple:
 
     route_1 = route_from_vectors(vectors_1)
     route_2 = route_from_vectors(vectors_2)
-    return route_1, route_2
+    intersections = (set(route_1) & set(route_2)) - {(0, 0)}
+
+    return route_1, route_2, intersections
 
 
 def manhattan(point: tuple) -> int:
@@ -52,15 +54,13 @@ def manhattan(point: tuple) -> int:
 
 
 def solution_part_1(input_data: str) -> int:
-    route_1, route_2 = routes_from_input_data(input_data)
-    intersections = (set(route_1) & set(route_2)) - {(0, 0)}
+    route_1, route_2, intersections = routes_from_input_data(input_data)
 
     return min(map(manhattan, intersections))
 
 
 def solution_part_2(input_data: str) -> int:
-    route_1, route_2 = routes_from_input_data(input_data)
-    intersections = (set(route_1) & set(route_2)) - {(0, 0)}
+    route_1, route_2, intersections = routes_from_input_data(input_data)
 
     return min(route_1.index(intersection) + route_2.index(intersection)
                for intersection in intersections)

@@ -1,7 +1,7 @@
 from itertools import product
 
 
-def vector_from_string(input_str):
+def vector_from_string(input_str: str) -> tuple:
     direction, distance = input_str[0], int(input_str[1:])
     vector = {
                 'U': (0, -distance), 'D': (0, distance),
@@ -11,7 +11,7 @@ def vector_from_string(input_str):
     return vector
 
 
-def route_from_vectors(vectors):
+def route_from_vectors(vectors: list) -> list:
     route = []
     current_position = (0, 0)
 
@@ -37,7 +37,7 @@ def route_from_vectors(vectors):
     return route
 
 
-def routes_from_input_data(input_data):
+def routes_from_input_data(input_data: str) -> tuple:
     vectors_1, vectors_2 = [[vector_from_string(item)
                              for item in line.split(',')]
                             for line in input_data.splitlines()]
@@ -47,18 +47,18 @@ def routes_from_input_data(input_data):
     return route_1, route_2
 
 
-def manhattan(point):
+def manhattan(point: tuple) -> int:
     return abs(point[0]) + abs(point[1])
 
 
-def solution_part_1(input_data):
+def solution_part_1(input_data: str) -> int:
     route_1, route_2 = routes_from_input_data(input_data)
     intersections = (set(route_1) & set(route_2)) - {(0, 0)}
 
     return min(map(manhattan, intersections))
 
 
-def solution_part_2(input_data):
+def solution_part_2(input_data: str) -> int:
     route_1, route_2 = routes_from_input_data(input_data)
     intersections = (set(route_1) & set(route_2)) - {(0, 0)}
 

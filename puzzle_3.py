@@ -11,17 +11,18 @@ def vector_from_string(input_str: str) -> tuple:
     return vector
 
 
+def inclusive_range(n):
+    step = 1 if n >= 0 else -1
+    return range(0, n + step, step)
+
+
 def route_from_vectors(vectors: list) -> list:
     route = []
     current_position = (0, 0)
 
     for dist_x, dist_y in vectors:
-        step_x = 1 if dist_x >= 0 else -1
-        step_y = 1 if dist_y >= 0 else -1
         first_on_segment = True
-
-        for point in product(range(0, dist_x + step_x, step_x),
-                             range(0, dist_y + step_y, step_y)):
+        for point in product(inclusive_range(dist_x), inclusive_range(dist_y)):
             point_on_route = (current_position[0] + point[0],
                               current_position[1] + point[1])
 

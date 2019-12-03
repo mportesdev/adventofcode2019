@@ -2,7 +2,7 @@
 
 
 def fuel_from_mass(mass):
-    return mass // 3 - 2
+    return max(mass // 3 - 2, 0)
 
 
 with open('puzzle_1_input') as f:

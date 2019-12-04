@@ -10,7 +10,8 @@ def contains_doubles(n):
 def no_decrease(n):
     as_string = f'{n:06}'
     for i in range(1, len(as_string)):
-        if int(as_string[i]) < int(as_string[i - 1]):
+        # we could compare ord() or int(), but this works, too
+        if as_string[i] < as_string[i - 1]:
             return False
 
     return True

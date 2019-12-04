@@ -3,11 +3,11 @@ import re
 repeating_digits = re.compile(r'(\d)\1+')
 
 
-def contains_doubles(n):
+def contains_doubles(n: int) -> bool:
     return repeating_digits.search(f'{n:06}') is not None
 
 
-def no_decrease(n):
+def no_decrease(n: int) -> bool:
     as_string = f'{n:06}'
     for i in range(1, len(as_string)):
         # we could compare ord() or int(), but this works, too
@@ -17,7 +17,7 @@ def no_decrease(n):
     return True
 
 
-def contains_exact_double(n):
+def contains_exact_double(n: int) -> bool:
     for match_obj in repeating_digits.finditer(f'{n:06}'):
         if len(match_obj.group()) == 2:
             return True

@@ -1,8 +1,8 @@
-def decimal_digit(n, order):
+def decimal_digit(n: int, order: int) -> int:
     return (n // 10**order) % 10
 
 
-def execute_program(memory, inputs):
+def execute_program(memory: list, inputs: list):
     """Run the Intcode program, modifying the memory in-place."""
     # instruction pointer
     ip = 0

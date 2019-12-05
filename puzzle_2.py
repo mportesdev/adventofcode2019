@@ -1,7 +1,7 @@
 # Part 1
 
 
-def execute_program(memory):
+def execute_program(memory: list) -> None:
     """Run the Intcode program, modifying the memory in-place."""
     # instruction pointer
     ip = 0

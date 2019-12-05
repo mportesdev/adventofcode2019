@@ -11,7 +11,7 @@ def vector_from_string(input_str: str) -> tuple:
     return vector
 
 
-def inclusive_range(n):
+def inclusive_range(n: int) -> range:
     step = 1 if n >= 0 else -1
     return range(0, n + step, step)
 

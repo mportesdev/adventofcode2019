@@ -19,6 +19,7 @@ def execute_program(memory, inputs):
         opcode = opcode % 100
 
         if opcode in (1, 2, 7, 8):
+            # opcodes with 3 parameters (2 values + 1 address)
             param_1, param_2, target_addr = memory[ip + 1:ip + 4]
             if param_1_mode == 'position':
                 param_1 = memory[param_1]
@@ -29,14 +30,18 @@ def execute_program(memory, inputs):
             ip += 4
 
         elif opcode in (3, 4):
+            # opcodes with 1 parameter
             param = memory[ip + 1]
             if opcode == 3:
+                # input
                 memory[param] = next(input_buffer)
             else:
+                # output
                 yield param if param_1_mode == 'immediate' else memory[param]
             ip += 2
 
         elif opcode in (5, 6):
+            # opcodes with 2 parameters (1 value + 1 address)
             param, jump_addr = memory[ip + 1:ip + 3]
             if param_1_mode == 'position':
                 param = memory[param]

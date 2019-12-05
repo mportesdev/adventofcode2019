@@ -28,14 +28,12 @@ def execute_program(memory, inputs):
             memory[target_addr] = dispatch_dict[opcode](param_1, param_2)
             ip += 4
 
-        elif opcode == 3:
-            target_addr = memory[ip + 1]
-            memory[target_addr] = next(input_buffer)
-            ip += 2
-
-        elif opcode == 4:
+        elif opcode in (3, 4):
             param = memory[ip + 1]
-            yield param if param_1_mode == 'immediate' else memory[param]
+            if opcode == 3:
+                memory[param] = next(input_buffer)
+            else:
+                yield param if param_1_mode == 'immediate' else memory[param]
             ip += 2
 
         elif opcode in (5, 6):

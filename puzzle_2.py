@@ -6,11 +6,8 @@ def execute_program(memory):
     # instruction pointer
     ip = 0
 
-    while True:
-        opcode = memory[ip]
-        if opcode == 99:
-            return
-        elif opcode in (1, 2):
+    while (opcode := memory[ip]) != 99:
+        if opcode in (1, 2):
             addr_1, addr_2, target_addr = memory[ip + 1:ip + 4]
             memory[target_addr] = (memory[addr_1] + memory[addr_2]
                                    if opcode == 1

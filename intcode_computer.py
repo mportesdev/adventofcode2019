@@ -18,8 +18,8 @@ def memory_write(memory, address, value):
     memory[address] = value
 
 
-def execute_program(state, input_buffer: list):
-    memory, ip = state
+def execute_program(memory, input_buffer: list):
+    ip = 0
     relative_base = 0
 
     dispatch_dict = {1: lambda x, y: x + y,
@@ -76,7 +76,6 @@ def execute_program(state, input_buffer: list):
 
                 if opcode == 4:
                     # output
-                    state[1] = ip
                     yield param
 
                 else:

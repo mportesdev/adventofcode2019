@@ -5,9 +5,9 @@ if __name__ == '__main__':
         memory = [int(elem) for elem in f.read().split(',')]
 
     # Part 1
-    outputs = list(execute_program([memory.copy(), 0], [1]))
+    outputs = list(execute_program(memory.copy(), [1]))
     print(f'Solution: {outputs[0]}')
 
     # Part 2
-    outputs = list(execute_program([memory.copy(), 0], [2]))
+    outputs = list(execute_program(memory.copy(), [2]))
     print(f'Solution: {outputs[0]}')

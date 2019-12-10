@@ -68,98 +68,98 @@ def test_memory_write():
 def test_execute_program_day_2_solution(input_day_2):
     memory = input_day_2.copy()
     memory[1:3] = [12, 2]
-    __ = list(execute_program([memory, 0], []))
+    __ = list(execute_program(memory, []))
     assert memory[0] == 3706713
 
     memory = input_day_2.copy()
     memory[1:3] = [86, 9]
-    __ = list(execute_program([memory, 0], []))
+    __ = list(execute_program(memory, []))
     assert memory[0] == 19690720
 
 
 def test_execute_program_day_5_examples():
     # opcode 3 and 4
     memory = [3, 0, 4, 0, 99]
-    output = list(execute_program([memory, 0], [68]))
+    output = list(execute_program(memory, [68]))
     assert output == [68]
     assert memory == [68, 0, 4, 0, 99]
 
     # opcode 2, position + immediate
     memory = [1002, 4, 3, 4, 33]
-    output = list(execute_program([memory, 0], []))
+    output = list(execute_program(memory, []))
     assert output == []
     assert memory == [1002, 4, 3, 4, 99]
 
     # opcode 5 immediate, test 0 is non-zero
     memory = [3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1]
     input_buffer = [0]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # opcode 5 immediate, test 68 is non-zero
     memory = [3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1]
     input_buffer = [68]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 6, test 0 is zero
     memory = [3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9]
     input_buffer = [0]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # opcode 6, test 68 is zero
     memory = [3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9]
     input_buffer = [68]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 7, test 5 < 8
     memory = [3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8]
     input_buffer = [5]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 7, test 8 < 8
     memory = [3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8]
     input_buffer = [8]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # opcode 7 immediate, test 5 < 8
     memory = [3, 3, 1107, -1, 8, 3, 4, 3, 99]
     input_buffer = [5]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 7 immediate, test 8 < 8
     memory = [3, 3, 1107, -1, 8, 3, 4, 3, 99]
     input_buffer = [8]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # opcode 8, test 8 == 8
     memory = [3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8]
     input_buffer = [8]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 8, test 5 == 8
     memory = [3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8]
     input_buffer = [5]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # opcode 8 immediate, test 8 == 8
     memory = [3, 3, 1108, -1, 8, 3, 4, 3, 99]
     input_buffer = [8]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1]
 
     # opcode 8 immediate, test 5 == 8
     memory = [3, 3, 1108, -1, 8, 3, 4, 3, 99]
     input_buffer = [5]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [0]
 
     # input below 8
@@ -168,7 +168,7 @@ def test_execute_program_day_5_examples():
               104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98,
               99]
     input_buffer = [6]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [999]
 
     # input 8
@@ -177,7 +177,7 @@ def test_execute_program_day_5_examples():
               104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98,
               99]
     input_buffer = [8]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1000]
 
     # input below 8
@@ -186,31 +186,31 @@ def test_execute_program_day_5_examples():
               104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98,
               99]
     input_buffer = [68]
-    output = list(execute_program([memory, 0], input_buffer))
+    output = list(execute_program(memory, input_buffer))
     assert output == [1001]
 
 
 def test_execute_program_day_5_solution(input_day_5):
-    output = list(execute_program([input_day_5.copy(), 0], [1]))
+    output = list(execute_program(input_day_5.copy(), [1]))
     assert output == [0, 0, 0, 0, 0, 0, 0, 0, 0, 16348437]
 
-    output = list(execute_program([input_day_5.copy(), 0], [5]))
+    output = list(execute_program(input_day_5.copy(), [5]))
     assert output == [6959377]
 
 
 def test_execute_program_day_7_solution(input_day_7):
-    output = list(execute_program([input_day_7.copy(), 0], [2, 0]))
+    output = list(execute_program(input_day_7.copy(), [2, 0]))
     assert output == [3]
-    output = list(execute_program([input_day_7.copy(), 0], [0, 3]))
+    output = list(execute_program(input_day_7.copy(), [0, 3]))
     assert output == [27]
-    output = list(execute_program([input_day_7.copy(), 0], [1, 27]))
+    output = list(execute_program(input_day_7.copy(), [1, 27]))
     assert output == [688]
-    output = list(execute_program([input_day_7.copy(), 0], [4, 688]))
+    output = list(execute_program(input_day_7.copy(), [4, 688]))
     assert output == [41316]
-    output = list(execute_program([input_day_7.copy(), 0], [3, 41316]))
+    output = list(execute_program(input_day_7.copy(), [3, 41316]))
     assert output == [206580]
 
-    output = list(execute_program([input_day_7.copy(), 0],
+    output = list(execute_program(input_day_7.copy(),
                                   [8, 16, 69, 558, 2242, 8974, 35916, 35922,
                                    71854, 574848, 1149703]))
     assert output == [32, 138, 559, 2243, 8976, 35917, 35923, 71855, 1149696,
@@ -220,23 +220,23 @@ def test_execute_program_day_7_solution(input_day_7):
 def test_execute_program_day_9_examples():
     memory = [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006,
               101, 0, 99]
-    output = list(execute_program([memory.copy(), 0], []))
+    output = list(execute_program(memory.copy(), []))
     assert output == memory
 
     memory = [1102, 34915192, 34915192, 7, 4, 7, 99, 0]
-    output = list(execute_program([memory.copy(), 0], []))
+    output = list(execute_program(memory.copy(), []))
     assert len(output) == 1
     assert len(str(output[0])) == 16
 
     memory = [104, 1125899906842624, 99]
-    output = list(execute_program([memory.copy(), 0], []))
+    output = list(execute_program(memory.copy(), []))
     assert len(output) == 1
     assert output[0] == 1125899906842624
 
 
 def test_execute_program_day_9_solution(input_day_9):
-    output = list(execute_program([input_day_9.copy(), 0], [1]))
+    output = list(execute_program(input_day_9.copy(), [1]))
     assert output == [4006117640]
 
-    output = list(execute_program([input_day_9.copy(), 0], [2]))
+    output = list(execute_program(input_day_9.copy(), [2]))
     assert output == [88231]

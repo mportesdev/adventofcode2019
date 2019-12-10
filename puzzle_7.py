@@ -6,12 +6,12 @@ from intcode_computer import execute_program
 def get_output_signal(memory, phases):
     value = 0
     for phase in phases:
-        value = next(execute_program([memory.copy(), 0], [phase, value]))
+        value = next(execute_program(memory.copy(), [phase, value]))
     return value
 
 
 def run_feedback_loop(memory, phases):
-    states = [[memory.copy(), 0] for __ in range(5)]
+    memories = [memory.copy() for __ in range(5)]
     input_buffers = [[] for __ in range(5)]
     value = 0
     init_phase = True
@@ -26,7 +26,7 @@ def run_feedback_loop(memory, phases):
             init_phase = False
 
         try:
-            value = next(execute_program(states[amp], input_buffers[amp]))
+            value = next(execute_program(memories[amp], input_buffers[amp]))
         except StopIteration:
             return value
 

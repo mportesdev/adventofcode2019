@@ -1,5 +1,13 @@
+import pytest
+
 from intcode_computer import decimal_digit, memory_read, memory_write, \
                              execute_program
+
+
+@pytest.fixture
+def input_day_9():
+    with open('puzzle_9_input') as f:
+        return [int(elem) for elem in f.read().split(',')]
 
 
 def test_get_decimal_digit():
@@ -152,7 +160,7 @@ def test_execute_program_day_5():
     assert output == [1001]
 
 
-def test_execute_program_day_9():
+def test_execute_program_day_9_examples():
     memory = [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006,
               101, 0, 99]
     output = list(execute_program([memory.copy(), 0], []))
@@ -167,3 +175,11 @@ def test_execute_program_day_9():
     output = list(execute_program([memory.copy(), 0], []))
     assert len(output) == 1
     assert output[0] == 1125899906842624
+
+
+def test_execute_program_day_9_solution(input_day_9):
+    output = list(execute_program([input_day_9.copy(), 0], [1]))
+    assert output == [4006117640]
+
+    output = list(execute_program([input_day_9.copy(), 0], [2]))
+    assert output == [88231]

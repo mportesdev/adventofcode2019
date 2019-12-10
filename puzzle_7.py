@@ -6,12 +6,12 @@ from intcode_computer import execute_program
 def get_output_signal(memory, phases):
     value = 0
     for phase in phases:
-        value = next(execute_program([list(memory), 0], [phase, value]))
+        value = next(execute_program([memory.copy(), 0], [phase, value]))
     return value
 
 
 def run_feedback_loop(memory, phases):
-    states = [[list(memory), 0] for __ in range(5)]
+    states = [[memory.copy(), 0] for __ in range(5)]
     input_buffers = [[] for __ in range(5)]
     value = 0
     init_phase = True
@@ -33,7 +33,7 @@ def run_feedback_loop(memory, phases):
 
 if __name__ == '__main__':
     with open('puzzle_7_input') as f:
-        memory = tuple(int(elem) for elem in f.read().split(','))
+        memory = [int(elem) for elem in f.read().split(',')]
 
     # Part 1
     solution = max(get_output_signal(memory, phases)

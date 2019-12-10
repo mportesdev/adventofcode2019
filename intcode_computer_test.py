@@ -5,6 +5,12 @@ from intcode_computer import decimal_digit, memory_read, memory_write, \
 
 
 @pytest.fixture
+def input_day_7():
+    with open('puzzle_7_input') as f:
+        return [int(elem) for elem in f.read().split(',')]
+
+
+@pytest.fixture
 def input_day_9():
     with open('puzzle_9_input') as f:
         return [int(elem) for elem in f.read().split(',')]
@@ -158,6 +164,25 @@ def test_execute_program_day_5():
     input_buffer = [68]
     output = list(execute_program([memory, 0], input_buffer))
     assert output == [1001]
+
+
+def test_execute_program_day_7_solution(input_day_7):
+    output = list(execute_program([input_day_7.copy(), 0], [2, 0]))
+    assert output == [3]
+    output = list(execute_program([input_day_7.copy(), 0], [0, 3]))
+    assert output == [27]
+    output = list(execute_program([input_day_7.copy(), 0], [1, 27]))
+    assert output == [688]
+    output = list(execute_program([input_day_7.copy(), 0], [4, 688]))
+    assert output == [41316]
+    output = list(execute_program([input_day_7.copy(), 0], [3, 41316]))
+    assert output == [206580]
+
+    output = list(execute_program([input_day_7.copy(), 0],
+                                  [8, 16, 69, 558, 2242, 8974, 35916, 35922,
+                                   71854, 574848, 1149703]))
+    assert output == [32, 138, 559, 2243, 8976, 35917, 35923, 71855, 1149696,
+                      2299406]
 
 
 def test_execute_program_day_9_examples():

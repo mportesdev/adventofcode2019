@@ -57,14 +57,14 @@ if __name__ == '__main__':
                    5)
 
     # red wire
-    for x, y in route_1:
-        img.putpixel((x - min_x, y - min_y), 1)
+    route_1 = [(x - min_x, y - min_y) for x, y in route_1]
+    draw.point(route_1, 1)
 
     # green wire
-    for x, y in route_2:
-        img.putpixel((x - min_x, y - min_y), 2)
+    route_2 = [(x - min_x, y - min_y) for x, y in route_2]
+    draw.point(route_2, 2)
 
     # black dot in origin
-    img.putpixel((-min_x, -min_y), 0)
+    draw.point((-min_x, -min_y), 0)
 
     img.save('puzzle_3.png')

@@ -13,12 +13,14 @@ def get_output_signal(memory, phases):
 def run_feedback_loop(memory, phases):
     memories = [memory.copy() for __ in range(5)]
     input_buffers = [[] for __ in range(5)]
+    amplifiers = []
     value = 0
     init_phase = True
 
     for amp in cycle(range(5)):
         if init_phase:
             input_buffers[amp].extend([phases[amp], value])
+            amplifiers.append(execute_program(memories[amp], input_buffers[amp]))
         else:
             input_buffers[amp].append(value)
 
@@ -26,7 +28,7 @@ def run_feedback_loop(memory, phases):
             init_phase = False
 
         try:
-            value = next(execute_program(memories[amp], input_buffers[amp]))
+            value = next(amplifiers[amp])
         except StopIteration:
             return value
 

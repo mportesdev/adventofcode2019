@@ -1,6 +1,6 @@
 from itertools import chain
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from puzzle_3 import vector_from_string, route_from_vectors, manhattan
 
@@ -35,25 +35,26 @@ if __name__ == '__main__':
                     96, 96, 96,
                     96, 0, 96,
                     0, 96, 96])
+    draw = ImageDraw.Draw(img)
 
     # origin
-    for y in range(-15 - min_y, 16 - min_y):
-        for x in range(-15 - min_x, 16 - min_x):
-            img.putpixel((x, y), 3)
+    draw.rectangle([(-15 - min_x, -15 - min_y),
+                    (15 - min_x, 15 - min_y)],
+                   3)
 
     # intersection 1
-    for y in range(-15 - min_y + intersection_1[1],
-                   16 - min_y + intersection_1[1]):
-        for x in range(-15 - min_x + intersection_1[0],
-                       16 - min_x + intersection_1[0]):
-            img.putpixel((x, y), 4)
+    draw.rectangle([(-15 - min_x + intersection_1[0],
+                     -15 - min_y + intersection_1[1]),
+                    (15 - min_x + intersection_1[0],
+                     15 - min_y + intersection_1[1])],
+                   4)
 
     # intersection 2
-    for y in range(-15 - min_y + intersection_2[1],
-                   16 - min_y + intersection_2[1]):
-        for x in range(-15 - min_x + intersection_2[0],
-                       16 - min_x + intersection_2[0]):
-            img.putpixel((x, y), 5)
+    draw.rectangle([(-15 - min_x + intersection_2[0],
+                     -15 - min_y + intersection_2[1]),
+                    (15 - min_x + intersection_2[0],
+                     15 - min_y + intersection_2[1])],
+                   5)
 
     # red wire
     for x, y in route_1:

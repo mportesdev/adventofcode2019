@@ -5,6 +5,12 @@ from intcode_computer import decimal_digit, memory_read, memory_write, \
 
 
 @pytest.fixture
+def input_day_2():
+    with open('puzzle_2_input') as f:
+        return [int(elem) for elem in f.read().split(',')]
+
+
+@pytest.fixture
 def input_day_5():
     with open('puzzle_5_input') as f:
         return [int(elem) for elem in f.read().split(',')]
@@ -57,6 +63,18 @@ def test_memory_write():
 
     memory_write(memory, 10, 7)
     assert memory == [5, 2, 3, 6, 0, 0, 0, 0, 0, 0, 7]
+
+
+def test_execute_program_day_2_solution(input_day_2):
+    memory = input_day_2.copy()
+    memory[1:3] = [12, 2]
+    __ = list(execute_program([memory, 0], []))
+    assert memory[0] == 3706713
+
+    memory = input_day_2.copy()
+    memory[1:3] = [86, 9]
+    __ = list(execute_program([memory, 0], []))
+    assert memory[0] == 19690720
 
 
 def test_execute_program_day_5_examples():

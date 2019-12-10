@@ -1,12 +1,9 @@
-from math import acos, pi
+from math import atan2, hypot, pi
 
 
 def polar_coordinates(dx, dy):
-    dist = (dx**2 + dy**2) ** 0.5
-    angle = acos(dx / dist)
-
-    if dy < 0:
-        angle += 2 * (pi - angle)
+    dist = hypot(dx, dy)
+    angle = atan2(dy, dx)
 
     # adjust for upward direction, e.g. (dx=0, dy=-1), to be angle 0
     angle = (angle + pi/2) % (2 * pi)

@@ -20,7 +20,7 @@ class Robot:
         grid[self.y][self.x] = color
 
     def turn(self, turn_direction):
-        self.direction = self.turn_dispatch[robot.direction][turn_direction]
+        self.direction = self.turn_dispatch[self.direction][turn_direction]
 
     def move(self):
         self.x += self.direction[0]

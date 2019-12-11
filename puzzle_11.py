@@ -12,10 +12,10 @@ class Robot:
 
 def paint_job(grid, robot):
     turn_dispatch = {
-        (0, -1): {0: (-1, 0), 1: (1, 0)},        # up
-        (1, 0): {0: (0, -1), 1: (0, 1)},         # right
-        (0, 1): {0: (1, 0), 1: (-1, 0)},         # down
-        (-1, 0): {0: (0, 1), 1: (0, -1)},        # left
+        (0, -1): {0: (-1, 0), 1: (1, 0)},        # up    ->  left | right
+        (1, 0): {0: (0, -1), 1: (0, 1)},         # right ->    up | down
+        (0, 1): {0: (1, 0), 1: (-1, 0)},         # down  -> right | left
+        (-1, 0): {0: (0, 1), 1: (0, -1)},        # left  ->  down | up
     }
 
     while True:
@@ -36,8 +36,8 @@ def paint_job(grid, robot):
         # turn robot
         robot.direction = turn_dispatch[robot.direction][turn]
         # move robot
-        robot.x = robot.x + robot.direction[0]
-        robot.y = robot.y + robot.direction[1]
+        robot.x += robot.direction[0]
+        robot.y += robot.direction[1]
 
     return sum(n < 2 for row in grid for n in row)
 
@@ -59,6 +59,5 @@ if __name__ == '__main__':
     paint_job(grid, robot)
 
     print('Solution:')
-    print('\n'.join(''.join(' \N{FULL BLOCK}-'[n]
-                            for n in row)
+    print('\n'.join(''.join(' █-'[n] for n in row)
                     for row in grid if 0 in row or 1 in row))

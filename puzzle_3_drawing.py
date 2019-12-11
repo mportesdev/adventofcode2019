@@ -42,17 +42,23 @@ if __name__ == '__main__':
                     0, 255, 0,
                     96, 96, 96,
                     96, 0, 96,
-                    0, 96, 96])
+                    0, 96, 96,
+                    255, 255, 255])
     draw = ImageDraw.Draw(img)
 
     # origin
     draw_box(draw, 0, 0, 30, 3)
+    draw.text((-min_x - 15, -min_y - 30), 'Central Port', fill=3)
 
     # intersection 1
     draw_box(draw, *intersection_1, 30, 4)
+    draw.text((intersection_1[0] - min_x - 15, intersection_1[1] - min_y - 30),
+              f'1:  {intersection_1}', fill=6)
 
     # intersection 2
     draw_box(draw, *intersection_2, 30, 5)
+    draw.text((intersection_2[0] - min_x - 15, intersection_2[1] - min_y - 30),
+              f'2:  {intersection_2}', fill=6)
 
     # red wire
     route_1 = [(x - min_x, y - min_y) for x, y in route_1]

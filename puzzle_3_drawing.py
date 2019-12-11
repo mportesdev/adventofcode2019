@@ -4,6 +4,14 @@ from PIL import Image, ImageDraw
 
 from puzzle_3 import vector_from_string, route_from_vectors, manhattan
 
+
+def draw_box(draw_obj, x, y, size, color):
+    half = size // 2
+    draw_obj.rectangle([(x - half - min_x, y - half - min_y),
+                        (x + half - min_x, y + half - min_y)],
+                       color)
+
+
 if __name__ == '__main__':
     with open('puzzle_3_input') as f:
         data = f.read()
@@ -38,23 +46,13 @@ if __name__ == '__main__':
     draw = ImageDraw.Draw(img)
 
     # origin
-    draw.rectangle([(-15 - min_x, -15 - min_y),
-                    (15 - min_x, 15 - min_y)],
-                   3)
+    draw_box(draw, 0, 0, 30, 3)
 
     # intersection 1
-    draw.rectangle([(-15 - min_x + intersection_1[0],
-                     -15 - min_y + intersection_1[1]),
-                    (15 - min_x + intersection_1[0],
-                     15 - min_y + intersection_1[1])],
-                   4)
+    draw_box(draw, *intersection_1, 30, 4)
 
     # intersection 2
-    draw.rectangle([(-15 - min_x + intersection_2[0],
-                     -15 - min_y + intersection_2[1]),
-                    (15 - min_x + intersection_2[0],
-                     15 - min_y + intersection_2[1])],
-                   5)
+    draw_box(draw, *intersection_2, 30, 5)
 
     # red wire
     route_1 = [(x - min_x, y - min_y) for x, y in route_1]

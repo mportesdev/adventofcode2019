@@ -3,31 +3,31 @@ import re
 
 
 class Moon:
-    def __init__(self, x, y, z):
+    def __init__(self, x: int, y: int, z: int) -> None:
         self.position = [x, y, z]
         self.velocity = [0, 0, 0]
 
-    def apply_gravity(self, other):
+    def apply_gravity(self, other) -> None:
         self.velocity[0] += gravity_pull(other.position[0] - self.position[0])
         self.velocity[1] += gravity_pull(other.position[1] - self.position[1])
         self.velocity[2] += gravity_pull(other.position[2] - self.position[2])
 
-    def apply_velocity(self):
+    def apply_velocity(self) -> None:
         self.position[0] += self.velocity[0]
         self.position[1] += self.velocity[1]
         self.position[2] += self.velocity[2]
 
-    def potential_energy(self):
+    def potential_energy(self) -> int:
         return sum(abs(n) for n in self.position)
 
-    def kinetic_energy(self):
+    def kinetic_energy(self) -> int:
         return sum(abs(n) for n in self.velocity)
 
-    def total_energy(self):
+    def total_energy(self) -> int:
         return self.potential_energy() * self.kinetic_energy()
 
 
-def gravity_pull(n):
+def gravity_pull(n: int) -> int:
     if n > 0:
         return 1
     if n < 0:
@@ -35,16 +35,16 @@ def gravity_pull(n):
     return 0
 
 
-def get_coords(vector_string):
+def get_coords(vector_string: str) -> list:
     str_numerals = re.findall(r'[+-]?\d+', vector_string)
     return [int(s) for s in str_numerals]
 
 
-def moons_from_data(input_data):
+def moons_from_data(input_data: str) -> list:
     return [Moon(*get_coords(line)) for line in input_data.splitlines()]
 
 
-def simulate_one_step(moons):
+def simulate_one_step(moons: list) -> None:
     for moon in moons:
         for other in moons:
             if other is not moon:

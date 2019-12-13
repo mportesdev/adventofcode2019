@@ -3,8 +3,8 @@ from pathlib import Path
 from intcode_computer import execute_program
 
 
-def save_grid(frame_number, score, grid):
-    """Save animation frames as text files to be used by the script
+def save_grid(frame_number: int, score: int, grid: list) -> None:
+    """Save animation frame as a text file to be used by the script
        img/puzzle_13_animation.py
     """
     temp_path = Path('img/tmp')
@@ -17,7 +17,7 @@ def save_grid(frame_number, score, grid):
             f.write(f'{line}\n')
 
 
-def play_game(grid, memory):
+def play_game(grid: list, memory: list) -> int:
     input_buffer = [0]
     game_program = execute_program(memory, input_buffer)
     score = 0
@@ -80,4 +80,4 @@ if __name__ == '__main__':
     game_memory[0] = 2
 
     final_score = play_game(grid, game_memory)
-    print(final_score)
+    print(f'Solution: {final_score}')

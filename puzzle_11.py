@@ -9,25 +9,25 @@ class Robot:
         (-1, 0): {0: (0, 1), 1: (0, -1)},        # left  ->  down | up
     }
 
-    def __init__(self, x, y, memory):
+    def __init__(self, x: int, y: int, memory: list) -> None:
         self.x = x
         self.y = y
         self.direction = (0, -1)
         self.input = []
         self.program = execute_program(memory, self.input)
 
-    def paint(self, grid, color):
+    def paint(self, grid: list, color: int) -> None:
         grid[self.y][self.x] = color
 
-    def turn(self, turn_direction):
+    def turn(self, turn_direction: int) -> None:
         self.direction = self.turn_dispatch[self.direction][turn_direction]
 
-    def move(self):
+    def move(self) -> None:
         self.x += self.direction[0]
         self.y += self.direction[1]
 
 
-def paint_job(grid, robot):
+def paint_job(grid: list, robot: Robot) -> None:
     while True:
         current_color = grid[robot.y][robot.x] & 1
         robot.input.append(current_color)
